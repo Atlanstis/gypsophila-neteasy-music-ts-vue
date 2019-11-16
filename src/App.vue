@@ -11,7 +11,9 @@ import { Component, Vue } from "vue-property-decorator";
   name: "app",
   components: {}
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  mounted() {}
+}
 </script>
 
 <style lang="scss"></style>
