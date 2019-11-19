@@ -30,10 +30,6 @@ export default class Theme extends Vue {
   private visible = false;
   private themeMap = themeMap;
 
-  created() {
-    console.log(this.themeMap);
-  }
-
   changeTheme(themeKey: ThemeEnum) {
     changeTheme(themeKey);
   }
@@ -41,6 +37,11 @@ export default class Theme extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.theme {
+  ::v-deep i {
+    color: var(--header-font-color);
+  }
+}
 .themes {
   @include flex-center();
 

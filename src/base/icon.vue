@@ -64,9 +64,6 @@ export default class Icon extends Vue {
     background: var(--round-hover-bgcolor);
   }
 }
-.iconfont {
-  color: var(--header-font-color);
-}
 .icon-component {
   cursor: pointer;
 }
