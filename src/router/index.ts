@@ -4,10 +4,10 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 export const menuRoutes = [
-  {
-    path: "/",
-    redirect: "/discovery"
-  },
+  // {
+  //   path: "/",
+  //   redirect: "/discovery"
+  // },
   {
     path: "/discovery",
     name: "discovery",
