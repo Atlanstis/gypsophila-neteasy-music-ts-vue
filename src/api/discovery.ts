@@ -1,15 +1,12 @@
 import request from "@/utils/axios";
-
-interface requestParams {
-  [key: string]: string | number;
-}
+import { RequestParams } from "@/types/interface/system";
 
 export const getBanner = () =>
   request({
     url: "/banner?type=0"
   });
 
-export const getPersonalized = (params: requestParams) =>
+export const getPersonalized = (params: RequestParams) =>
   request({
     url: "/personalized",
     params
