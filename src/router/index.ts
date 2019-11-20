@@ -33,7 +33,7 @@ export const menuRoutes = [
     path: "/playlists",
     name: LayoutCenterNameEnum.playlists,
     component: () =>
-      import(/* webpackChunkName: "discovery" */ "@/views/playlists/index.vue"),
+      import(/* webpackChunkName: "playlists" */ "@/views/playlists/index.vue"),
     meta: {
       title: "推荐歌单",
       icon: "playlist"
@@ -43,7 +43,7 @@ export const menuRoutes = [
     path: "/songs",
     name: LayoutCenterNameEnum.songs,
     component: () =>
-      import(/* webpackChunkName: "discovery" */ "@/views/playlists/index.vue"),
+      import(/* webpackChunkName: "songs" */ "@/views/playlists/index.vue"),
     meta: {
       title: "最新音乐",
       icon: "music"
@@ -53,7 +53,7 @@ export const menuRoutes = [
     path: "/mvs",
     name: LayoutCenterNameEnum.mvs,
     component: () =>
-      import(/* webpackChunkName: "discovery" */ "@/views/mvs/index.vue"),
+      import(/* webpackChunkName: "mvs" */ "@/views/mvs/index.vue"),
     meta: {
       title: "最新MV",
       icon: "mv"

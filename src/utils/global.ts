@@ -1,4 +1,22 @@
-import { Popover } from "element-ui";
+import { Popover, Carousel, CarouselItem } from "element-ui";
+import * as utils from "./index";
+
+// 全局图片错误处理
+window.addEventListener(
+  "error",
+  function(e) {
+    const target = e.target as HTMLImageElement; // 当前dom节点
+    if (target) {
+      const { tagName } = target;
+      if (tagName && tagName.toUpperCase() === "IMG") {
+        target.src =
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+      }
+    }
+  },
+  true
+);
+
 const requireComponent = require.context(
   "@/base",
   true,
@@ -19,6 +37,10 @@ export default {
       }
     });
 
-    Vue.use(Popover);
+    Vue.use(Popover)
+      .use(Carousel)
+      .use(CarouselItem);
+
+    Vue.prototype.$utils = utils;
   }
 };
