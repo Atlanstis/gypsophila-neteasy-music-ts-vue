@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Layout />
+    <MiNiPlayer />
   </div>
 </template>
 
@@ -8,11 +9,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import { themeMap, setDefaultTheme } from "@/utils/theme";
 import Layout from "@/layout/index.vue";
+import MiNiPlayer from "@/components/mini-player.vue";
 
 @Component({
   name: "app",
   components: {
-    Layout
+    Layout,
+    MiNiPlayer
   }
 })
 export default class App extends Vue {
