@@ -1,6 +1,6 @@
 import { Popover, Carousel, CarouselItem } from "element-ui";
 import * as utils from "./index";
-
+import Vue from "vue";
 // 全局图片错误处理
 window.addEventListener(
   "error",
@@ -24,23 +24,25 @@ const requireComponent = require.context(
 );
 
 export default {
-  install(Vue: any) {
+  install(vue: typeof Vue) {
     // 批量注册base组件
     requireComponent.keys().forEach(fileName => {
       const componentConfig = requireComponent(fileName);
-      const componentName = componentConfig.default.name;
+      const componentName =
+        componentConfig.default.options.name || componentConfig.default.name;
       if (componentName) {
-        Vue.component(
+        vue.component(
           componentName,
           componentConfig.default || componentConfig
         );
       }
     });
 
-    Vue.use(Popover)
+    vue
+      .use(Popover)
       .use(Carousel)
       .use(CarouselItem);
 
-    Vue.prototype.$utils = utils;
+    vue.prototype.$utils = utils;
   }
 };
