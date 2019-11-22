@@ -25,6 +25,21 @@ export default class ProgressBar extends Vue {
   @Prop({ default: false })
   private disabled!: boolean;
 
+  @Prop({ default: 0 })
+  private percent!: number;
+
+  mounted() {
+    if (this.percent > 0) {
+      this.setProgressOffset(this.percent);
+    }
+  }
+
+  private setProgressOffset(percent: number) {
+    const barWidth = (this.$refs.progressBar as HTMLElement).clientWidth;
+    const offsetWidth = percent * barWidth;
+    this._offset(offsetWidth);
+  }
+
   private progressClick(event: MouseEvent) {
     if (!this.disabled) {
       const $progressBar = this.$refs.progressBar as HTMLElement;
@@ -34,7 +49,18 @@ export default class ProgressBar extends Vue {
         Math.min(event.pageX - rect.left, $progressBar.clientWidth)
       );
       this._offset(offsetWidth);
+      this._triggerPercent();
     }
+  }
+
+  private _triggerPercent() {
+    this.$emit("percentChange", this._getPercent());
+  }
+
+  private _getPercent() {
+    const barWidth = (this.$refs.progressBar as HTMLElement).clientWidth;
+    let percent = (this.$refs.progress as HTMLElement).clientWidth / barWidth;
+    return Number(percent.toFixed(2));
   }
 
   private _offset(offsetWidth: number) {

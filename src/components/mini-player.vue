@@ -8,6 +8,38 @@
       <Icon :size="24" class="icon" type="next" />
     </div>
 
+    <div class="song">
+      song
+    </div>
+
+    <div class="mode">
+      <el-popover
+        placement="top"
+        trigger="hover"
+        width="160"
+        popper-class="play-mode-popover"
+      >
+        <p class="play-mode-text">{{ playModeText }}</p>
+        <Icon
+          :size="20"
+          :type="palyModeIcon"
+          @click="playModeChange"
+          slot="reference"
+          class="mode-item"
+        />
+      </el-popover>
+      <Icon
+        :size="20"
+        @click="togglePlaylistShow"
+        class="mode-item"
+        type="playlist"
+      />
+
+      <div class="volume">
+        <Volume />
+      </div>
+    </div>
+
     <div class="progress-bar-wrap">
       <ProgressBar />
     </div>
@@ -31,6 +63,18 @@ export default class MiNiPlayer extends Vue {
   private get playIcon() {
     return this.playing ? PlayingStatus.Pause : PlayingStatus.Play;
   }
+
+  private get palyModeIcon() {
+    return "sequence";
+  }
+
+  private get playModeText() {
+    return "顺序播放";
+  }
+
+  togglePlaylistShow() {}
+
+  playModeChange() {}
 
   togglePlaying() {
     this.playing = !this.playing;
@@ -89,11 +133,31 @@ export default class MiNiPlayer extends Vue {
     }
   }
 
+  .mode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .mode-item {
+      display: block;
+      margin-right: 16px;
+      width: 22px;
+    }
+  }
+
   .progress-bar-wrap {
     position: absolute;
     left: 0;
     right: 0;
     top: -14px;
+  }
+}
+</style>
+
+<style lang="scss">
+.play-mode-popover {
+  .play-mode-text {
+    text-align: center;
   }
 }
 </style>

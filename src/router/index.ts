@@ -36,7 +36,7 @@ export const menuRoutes = [
       import(/* webpackChunkName: "playlists" */ "@/views/playlists/index.vue"),
     meta: {
       title: "推荐歌单",
-      icon: "playlist"
+      icon: "playlist-menu"
     }
   },
   {
