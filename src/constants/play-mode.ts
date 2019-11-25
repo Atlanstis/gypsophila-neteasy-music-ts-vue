@@ -1,11 +1,9 @@
-interface PlayMode {
-  code: string;
-  icon: string;
-  name: string;
-}
-
 interface PlayModeMap {
-  [key: string]: PlayMode;
+  [key: string]: {
+    code: string;
+    icon: string;
+    name: string;
+  };
 }
 
 export const playModeMap: PlayModeMap = {

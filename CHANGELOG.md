@@ -1,5 +1,16 @@
 # Changelog
 
+### 文档类
+
+1. [vue-property-decorator文档](https://github.com/kaorun343/vue-property-decorator)
+
+### 2019-11-25
+
+#### 1.功能端
+
+1. 音量条
+2. 播放模式
+
 ### 2019-11-20
 
 #### 1.功能端

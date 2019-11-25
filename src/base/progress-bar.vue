@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import { prefixStyle } from "@/utils";
 
 const transform: any = prefixStyle("transform");
@@ -27,6 +27,11 @@ export default class ProgressBar extends Vue {
 
   @Prop({ default: 0 })
   private percent!: number;
+
+  @Watch("percent")
+  onPercentWatch(newVal: number) {
+    this.setProgressOffset(newVal);
+  }
 
   mounted() {
     if (this.percent > 0) {

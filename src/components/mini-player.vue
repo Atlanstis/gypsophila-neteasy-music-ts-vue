@@ -22,8 +22,8 @@
         <p class="play-mode-text">{{ playModeText }}</p>
         <Icon
           :size="20"
-          :type="palyModeIcon"
-          @click="playModeChange"
+          :type="playModeIcon"
+          @click.native="playModeChange"
           slot="reference"
           class="mode-item"
         />
@@ -48,6 +48,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { playModeMap } from "@/constants/play-mode";
+
 enum PlayingStatus {
   Play = "play",
   Pause = "pause"
@@ -60,21 +62,34 @@ enum PlayingStatus {
 export default class MiNiPlayer extends Vue {
   private playing = false;
 
+  private playMode = "sequence";
+
   private get playIcon() {
     return this.playing ? PlayingStatus.Pause : PlayingStatus.Play;
   }
 
-  private get palyModeIcon() {
-    return "sequence";
+  private get curMode() {
+    return playModeMap[this.playMode];
+  }
+
+  private get playModeIcon() {
+    return this.curMode.icon;
   }
 
   private get playModeText() {
-    return "顺序播放";
+    return this.curMode.name;
   }
 
   togglePlaylistShow() {}
 
-  playModeChange() {}
+  playModeChange() {
+    const keys = Object.keys(playModeMap);
+    const curIndex = keys.findIndex(
+      key => playModeMap[key].code === this.playMode
+    );
+    const nextIndex = (curIndex + 1) % keys.length;
+    this.playMode = playModeMap[keys[nextIndex]].code;
+  }
 
   togglePlaying() {
     this.playing = !this.playing;
