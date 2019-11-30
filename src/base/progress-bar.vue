@@ -28,6 +28,11 @@ export default class ProgressBar extends Vue {
   @Prop({ default: 0 })
   private percent!: number;
 
+  @Prop({ default: false })
+  private draggable!: boolean;
+
+  private progressBtn!: HTMLElement;
+
   @Watch("percent")
   onPercentWatch(newVal: number) {
     this.setProgressOffset(newVal);
@@ -37,6 +42,36 @@ export default class ProgressBar extends Vue {
     if (this.percent > 0) {
       this.setProgressOffset(this.percent);
     }
+    if (this.draggable && !this.disabled) {
+      this.progressBtn = this.$refs.progressBtn as HTMLElement;
+      this.progressBtn.addEventListener("mousedown", this.mousedownHandle);
+    }
+  }
+
+  beforeDestroy() {
+    if (!this.disabled && this.draggable && this.progressBtn) {
+      this.progressBtn.removeEventListener("mousedown", this.mousedownHandle);
+    }
+  }
+
+  private mousedownHandle(e: MouseEvent) {
+    window.addEventListener("mousemove", this.mousemoveHandle);
+    window.addEventListener("mouseup", this.mouseupHandle);
+  }
+
+  private mousemoveHandle(e: MouseEvent) {
+    const $progressBar = this.$refs.progressBar as HTMLElement;
+    const rect = $progressBar.getBoundingClientRect();
+    const offsetWidth = Math.max(
+      0,
+      Math.min(e.pageX - rect.left, $progressBar.clientWidth)
+    );
+    this._offset(offsetWidth);
+  }
+
+  private mouseupHandle(e: MouseEvent) {
+    window.removeEventListener("mousemove", this.mousemoveHandle);
+    window.removeEventListener("mouseup", this.mouseupHandle);
   }
 
   private setProgressOffset(percent: number) {

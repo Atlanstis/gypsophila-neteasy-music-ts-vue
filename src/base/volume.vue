@@ -8,6 +8,7 @@
     />
     <div class="progress-wrap">
       <ProgressBar
+        :draggable="true"
         :alwaysShowBtn="true"
         :percent="volumePercent"
         @percentChange="percentChange"

@@ -4,6 +4,12 @@
 
 1. [vue-property-decorator文档](https://github.com/kaorun343/vue-property-decorator)
 
+### 2019-11-30
+
+#### 1.功能端
+
+1. 进度条添加拖动
+
 ### 2019-11-25
 
 #### 1.功能端
