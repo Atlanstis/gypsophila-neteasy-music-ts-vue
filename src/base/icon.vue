@@ -18,10 +18,13 @@ export default class Icon extends Vue {
   @Prop({ default: false })
   private backdrop!: boolean;
 
+  @Prop({ default: "" })
+  private color!: string;
+
   protected render() {
     const Icon = (
       <i
-        class={`iconfont icon-component icon-${this.type}`}
+        class={`iconfont icon-component ${this.getIconClass()}`}
         style={this.getIconStyle()}
       />
     );
@@ -38,6 +41,14 @@ export default class Icon extends Vue {
       );
     }
     return Icon;
+  }
+
+  getIconClass() {
+    let cls = `icon-${this.type}`;
+    if (this.color) {
+      cls += ` icon-color-${this.color}`;
+    }
+    return cls;
   }
 
   getIconStyle() {
@@ -66,5 +77,17 @@ export default class Icon extends Vue {
 }
 .icon-component {
   cursor: pointer;
+}
+
+.icon-color {
+  &-theme {
+    color: $theme-color;
+  }
+  &-white {
+    color: $white;
+  }
+  &-shallow {
+    color: var(--font-color-shallow-grey);
+  }
 }
 </style>

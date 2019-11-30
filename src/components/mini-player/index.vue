@@ -8,9 +8,7 @@
       <Icon :size="24" class="icon" type="next" />
     </div>
 
-    <div class="song">
-      song
-    </div>
+    <Song />
 
     <div class="mode">
       <el-popover
@@ -49,6 +47,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { playModeMap } from "@/constants/play-mode";
+import Volume from "./volume.vue";
+import Song from "./song.vue";
 
 enum PlayingStatus {
   Play = "play",
@@ -57,7 +57,7 @@ enum PlayingStatus {
 
 @Component({
   name: "MiNiPlayer",
-  components: {}
+  components: { Volume, Song }
 })
 export default class MiNiPlayer extends Vue {
   private playing = false;
@@ -152,6 +152,7 @@ export default class MiNiPlayer extends Vue {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex: 6;
 
     .mode-item {
       display: block;

@@ -9,7 +9,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { themeMap, setDefaultTheme } from "@/utils/theme";
 import Layout from "@/layout/index.vue";
-import MiNiPlayer from "@/components/mini-player.vue";
+import MiNiPlayer from "@/components/mini-player/index.vue";
 
 @Component({
   name: "app",
