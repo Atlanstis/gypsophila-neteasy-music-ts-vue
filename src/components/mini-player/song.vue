@@ -5,7 +5,7 @@
       <img
         alt="test"
         :src="
-          $utils.getImgUrl(
+          $utils.genImgUrl(
             'https://p1.music.126.net/UmoXRu8E_rBA_gE3hDU7Fg==/109951164511893184.jpg',
             80
           )

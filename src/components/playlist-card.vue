@@ -1,7 +1,7 @@
 <template>
   <div class="playlist-card">
     <div class="img-wrap">
-      <img :src="$utils.getImgUrl(card.picUrl, 300)" :alt="card.name" />
+      <img :src="$utils.genImgUrl(card.picUrl, 300)" :alt="card.name" />
       <div class="desc-wrap" v-if="card.copywriter">
         <span class="desc">{{ card.copywriter }}</span>
       </div>

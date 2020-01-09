@@ -5,7 +5,7 @@
     </div>
     <div class="img-wrap">
       <img
-        :src="$utils.getImgUrl($utils.getImgUrl(img, 120), 120)"
+        :src="$utils.genImgUrl($utils.genImgUrl(img, 120), 120)"
         :alt="name"
       />
       <PlayIcon class="play-icon" />

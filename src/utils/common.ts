@@ -1,4 +1,4 @@
-export function getImgUrl(url: string, w: number, h: number) {
+export function genImgUrl(url: string, w: number, h: number) {
   if (!h) {
     h = w;
   }

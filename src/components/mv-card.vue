@@ -1,7 +1,7 @@
 <template>
   <div class="mv-card">
     <div class="img-wrap">
-      <img :src="$utils.getImgUrl(card.picUrl, 500, 260)" :alt="card.name" />
+      <img :src="$utils.genImgUrl(card.picUrl, 500, 260)" :alt="card.name" />
       <div class="play-count-wrap" v-if="card.playCount">
         <Icon type="play" />
         {{ $utils.formatNumber(card.playCount) }}
