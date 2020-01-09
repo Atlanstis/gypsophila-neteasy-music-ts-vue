@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-bar" ref="progressBar" @click="progressClick">
+  <div class="progress-bar" ref="progressBar">
     <div class="bar-inner">
       <div class="progress" ref="progress"></div>
       <div class="progress-btn-wrapper" ref="progressBtn">
@@ -31,7 +31,7 @@ export default class ProgressBar extends Vue {
   @Prop({ default: false })
   private draggable!: boolean;
 
-  private progressBtn!: HTMLElement;
+  private progressBar!: HTMLElement;
 
   @Watch("percent")
   onPercentWatch(newVal: number) {
@@ -42,19 +42,28 @@ export default class ProgressBar extends Vue {
     if (this.percent > 0) {
       this.setProgressOffset(this.percent);
     }
-    if (this.draggable && !this.disabled) {
-      this.progressBtn = this.$refs.progressBtn as HTMLElement;
-      this.progressBtn.addEventListener("mousedown", this.mousedownHandle);
+    this.progressBar = this.$refs.progressBar as HTMLElement;
+    if (!this.disabled && this.progressBar) {
+      if (this.draggable) {
+        this.progressBar.addEventListener("mousedown", this.mousedownHandle);
+      } else {
+        this.progressBar.addEventListener("click", this.progressClick);
+      }
     }
   }
 
   beforeDestroy() {
-    if (!this.disabled && this.draggable && this.progressBtn) {
-      this.progressBtn.removeEventListener("mousedown", this.mousedownHandle);
+    if (!this.disabled && this.progressBar) {
+      if (this.draggable) {
+        this.progressBar.removeEventListener("mousedown", this.mousedownHandle);
+      } else {
+        this.progressBar.removeEventListener("click", this.progressClick);
+      }
     }
   }
 
   private mousedownHandle(e: MouseEvent) {
+    this.mousemoveHandle(e);
     window.addEventListener("mousemove", this.mousemoveHandle);
     window.addEventListener("mouseup", this.mouseupHandle);
   }
