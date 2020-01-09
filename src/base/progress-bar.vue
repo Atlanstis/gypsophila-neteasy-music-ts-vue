@@ -69,13 +69,7 @@ export default class ProgressBar extends Vue {
   }
 
   private mousemoveHandle(e: MouseEvent) {
-    const $progressBar = this.$refs.progressBar as HTMLElement;
-    const rect = $progressBar.getBoundingClientRect();
-    const offsetWidth = Math.max(
-      0,
-      Math.min(e.pageX - rect.left, $progressBar.clientWidth)
-    );
-    this._offset(offsetWidth);
+    this.progressClick(e);
   }
 
   private mouseupHandle(e: MouseEvent) {
