@@ -3,6 +3,14 @@
 ### 文档类
 
 1. [vue-property-decorator文档](https://github.com/kaorun343/vue-property-decorator)
+2. [TypeScript + 大型项目实战](https://juejin.im/post/5b54886ce51d45198f5c75d7)
+
+### 2020-1-10
+
+#### 1.安装插件
+
+1. [good-storage](https://www.npmjs.com/package/good-storage)：a storage lib which support sessionStorage and localStorage with the same api
+2. vuex-class
 
 ### 2019-11-30
 
