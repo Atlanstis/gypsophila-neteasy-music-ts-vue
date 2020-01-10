@@ -4,10 +4,7 @@
       <span class="order">{{ $utils.pad(order) }}</span>
     </div>
     <div class="img-wrap">
-      <img
-        :src="$utils.genImgUrl($utils.genImgUrl(img, 120), 120)"
-        :alt="name"
-      />
+      <img :src="$utils.genImgUrl(img, 120)" :alt="name" />
       <PlayIcon class="play-icon" />
     </div>
     <div class="song-content">
