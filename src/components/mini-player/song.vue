@@ -2,29 +2,23 @@
   <div class="song">
     <div class="img-wrap">
       <div class="mask"></div>
-      <img
-        alt="test"
-        :src="
-          $utils.genImgUrl(
-            'https://p1.music.126.net/UmoXRu8E_rBA_gE3hDU7Fg==/109951164511893184.jpg',
-            80
-          )
-        "
-      />
+      <img alt="test" :src="$utils.genImgUrl(currentSong.img, 80)" />
       <div class="player-control">
         <Icon :size="20" :type="playControlIcon" color="white" />
       </div>
     </div>
     <div class="content">
       <div class="top">
-        <p class="name">光の道標</p>
+        <p class="name">{{ currentSong.name }}</p>
         <p class="split">-</p>
-        <p class="artists">鹿乃</p>
+        <p class="artists">{{ currentSong.artistsText }}</p>
       </div>
       <div class="time">
-        <span class="played-time">04:29</span>
+        <span class="played-time">{{ $utils.formatTime(currentTime) }}</span>
         <span class="split">/</span>
-        <span class="total-time">05:06</span>
+        <span class="total-time">{{
+          $utils.formatTime(currentSong.duration / 1000)
+        }}</span>
       </div>
     </div>
   </div>
@@ -32,17 +26,24 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { State, namespace } from "vuex-class";
+import { NomaizedSongInterface } from "../../types/interface/business";
 
 enum PlayControl {
   Expand = "expand",
   narrow = "narrow"
 }
 
+const musicModule = namespace("music");
+
 @Component({
-  name: "Song",
-  components: {}
+  name: "Song"
 })
 export default class Song extends Vue {
+  @musicModule.State(state => state.currentSong)
+  currentSong!: NomaizedSongInterface;
+  @musicModule.State(state => state.currentTime) currentTime!: number;
+
   private get playControlIcon() {
     return PlayControl.Expand;
   }

@@ -37,6 +37,9 @@ export default class Volume extends Vue {
 
   private lastVolume: number = 0;
 
+  /**
+   * 是否静音
+   */
   private get isMute() {
     return this.volumePercent === 0;
   }
@@ -60,6 +63,7 @@ export default class Volume extends Vue {
 
   percentChange(percent: number) {
     this.volumePercent = percent;
+    this.$emit("volumeChange", percent);
   }
 
   toggleVolume() {

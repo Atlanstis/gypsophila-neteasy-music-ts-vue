@@ -4,6 +4,13 @@
 
 1. [vue-property-decorator文档](https://github.com/kaorun343/vue-property-decorator)
 2. [TypeScript + 大型项目实战](https://juejin.im/post/5b54886ce51d45198f5c75d7)
+3. [网易云音乐 NodeJS 版 API](https://binaryify.github.io/NeteaseCloudMusicApi/#/)
+
+### 2020-1-16
+
+#### 1.功能端
+
+1. 音乐播放的实现
 
 ### 2020-1-10
 

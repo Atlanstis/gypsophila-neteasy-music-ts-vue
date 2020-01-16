@@ -9,6 +9,7 @@
       >
         <SongCard
           class="song-card"
+          @click.native="clickSongHandle(listIndex, index)"
           :order="getSongOrder(listIndex, index)"
           v-for="(item, index) in list"
           v-bind="nomalizeSong(item)"
@@ -25,13 +26,18 @@ import { getNewSongs } from "@/api";
 import SongCard from "@/components/song-card.vue";
 import { SongInterface } from "@/types/interface/business";
 import { createSong } from "@/utils";
+import { namespace } from "vuex-class";
 
 const songsLimit = 10;
+const musicModule = namespace("music");
+
 @Component({
   name: "NewSongs",
   components: { SongCard }
 })
 export default class NewSongs extends Vue {
+  @musicModule.Action("startSong") startSong!: Function;
+
   private list: SongInterface[] = [];
   private chunkLimit = Math.ceil(songsLimit / 2);
 
@@ -42,13 +48,26 @@ export default class NewSongs extends Vue {
     ];
   }
 
+  private get normalizedSongs() {
+    return this.list.map(song => this.nomalizeSong(song));
+  }
+
   async created() {
     const { result } = (await getNewSongs()) as any;
     this.list = result;
   }
 
+  /**
+   * 获取歌曲顺序，从1开始
+   */
   getSongOrder(listIndex: number, index: number) {
     return this.chunkLimit * listIndex + index + 1;
+  }
+
+  clickSongHandle(listIndex: number, index: number) {
+    const songOringinIndex = this.getSongOrder(listIndex, index) - 1;
+    const nomalizedSong = this.normalizedSongs[songOringinIndex];
+    this.startSong(nomalizedSong);
   }
 
   nomalizeSong(song: SongInterface) {
@@ -58,7 +77,7 @@ export default class NewSongs extends Vue {
       song: {
         mvid,
         artists,
-        album: { blurPicUrl },
+        album: { blurPicUrl, id: albumId, name: albumName },
         duration
       }
     } = song;
@@ -69,7 +88,9 @@ export default class NewSongs extends Vue {
       img: blurPicUrl,
       artists,
       duration,
-      mvId: mvid
+      mvId: mvid,
+      albumId,
+      albumName
     });
   }
 }
