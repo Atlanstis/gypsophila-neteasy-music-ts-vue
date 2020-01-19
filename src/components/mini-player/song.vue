@@ -2,7 +2,10 @@
   <div class="song">
     <div class="img-wrap">
       <div class="mask"></div>
-      <img alt="test" :src="$utils.genImgUrl(currentSong.img, 80)" />
+      <img
+        :alt="currentSong.albumName"
+        :src="$utils.genImgUrl(currentSong.img, 80)"
+      />
       <div class="player-control">
         <Icon :size="20" :type="playControlIcon" color="white" />
       </div>

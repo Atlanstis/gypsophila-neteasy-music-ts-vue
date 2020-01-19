@@ -37,6 +37,7 @@ const musicModule = namespace("music");
 })
 export default class NewSongs extends Vue {
   @musicModule.Action("startSong") startSong!: Function;
+  @musicModule.Mutation("setPlaylist") setPlaylist!: Function;
 
   private list: SongInterface[] = [];
   private chunkLimit = Math.ceil(songsLimit / 2);
@@ -68,6 +69,7 @@ export default class NewSongs extends Vue {
     const songOringinIndex = this.getSongOrder(listIndex, index) - 1;
     const nomalizedSong = this.normalizedSongs[songOringinIndex];
     this.startSong(nomalizedSong);
+    this.setPlaylist(this.normalizedSongs);
   }
 
   nomalizeSong(song: SongInterface) {

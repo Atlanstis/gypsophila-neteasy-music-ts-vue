@@ -9,7 +9,7 @@ declare namespace MusicState {
     isPlaylistShow: boolean;
     isPlaylistPromptShow: boolean;
     isPlayerShow: boolean;
-    playlist: [];
+    playlist: NomaizedSongInterface[];
     playHistory: NomaizedSongInterface[];
     isMenuShow: boolean;
   }

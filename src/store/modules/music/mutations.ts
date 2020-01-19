@@ -1,5 +1,10 @@
 import storage from "good-storage";
-import { PLAY_MODE_KEY, PLAY_HISTORY_KEY } from "@/constants/storage-key";
+import {
+  PLAY_MODE_KEY,
+  PLAY_HISTORY_KEY,
+  PLAY_LIST_KEY,
+  CUR_SONG_KEY
+} from "@/constants/storage-key";
 import { NomaizedSongInterface } from "@/types/interface/business";
 import { MusicState } from "./interface";
 
@@ -12,6 +17,7 @@ const mutations = {
 
   // 设置当前播放歌曲
   setCurrentSong(state: MusicState.State, song: NomaizedSongInterface) {
+    storage.set(CUR_SONG_KEY, song);
     state.currentSong = song;
   },
 
@@ -32,6 +38,12 @@ const mutations = {
   // 设置当前播放时间
   setCurrentTime(state: MusicState.State, currentTime: number) {
     state.currentTime = currentTime;
+  },
+
+  // 设置播放列表
+  setPlaylist(state: MusicState.State, playlist: NomaizedSongInterface[]) {
+    storage.set(PLAY_LIST_KEY, playlist);
+    state.playlist = playlist;
   }
 };
 
