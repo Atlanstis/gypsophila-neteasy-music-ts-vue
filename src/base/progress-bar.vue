@@ -43,7 +43,7 @@ export default class ProgressBar extends Vue {
       this.setProgressOffset(this.percent);
     }
     this.progressBar = this.$refs.progressBar as HTMLElement;
-    if (!this.disabled && this.progressBar) {
+    if (this.progressBar) {
       if (this.draggable) {
         this.progressBar.addEventListener("mousedown", this.mousedownHandle);
       } else {
@@ -53,7 +53,7 @@ export default class ProgressBar extends Vue {
   }
 
   beforeDestroy() {
-    if (!this.disabled && this.progressBar) {
+    if (this.progressBar) {
       if (this.draggable) {
         this.progressBar.removeEventListener("mousedown", this.mousedownHandle);
       } else {
